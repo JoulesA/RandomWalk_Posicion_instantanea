@@ -231,8 +231,9 @@ class MainWindow(QWidget):
         self.combo_box.addItem('0.1')
         self.combo_box.addItem('1')
         self.combo_box.addItem('10')
+        self.combo_box.currentIndexChanged.connect(self.update_variable)
         # Inicializar la variable asociada al menú desplegable
-        self.selected_option = None
+        self.selected_option = 0.1
 
             # Items
         posLabel1 = QLabel("Posicion inicial")
@@ -322,27 +323,27 @@ class MainWindow(QWidget):
 
     # Funciones de los botones
     def btn1(self):
-        self.finalPoints[2][0] += 0.1
+        self.finalPoints[2][0] += self.selected_option
         self.fp3.setText("Eslabon 3: " + str(self.finalPoints[2]))
         self.Actualize()
     
     def btn2(self):
-        self.finalPoints[2][0] -= 0.1
+        self.finalPoints[2][0] -= self.selected_option
         self.fp3.setText("Eslabon 3: " + str(self.finalPoints[2]))
         self.Actualize()
 
     def btn3(self):
-        self.finalPoints[2][1] += 0.1
+        self.finalPoints[2][1] += self.selected_option
         self.fp3.setText("Eslabon 3: " + str(self.finalPoints[2]))
         self.Actualize()
 
     def btn4(self):
-        self.finalPoints[2][1] -= 0.1
+        self.finalPoints[2][1] -= self.selected_option
         self.fp3.setText("Eslabon 3: " + str(self.finalPoints[2]))
         self.Actualize()
 
     def btn5(self):
-        self.finalPoints[2][2] += 0.1
+        self.finalPoints[2][2] += self.selected_option
         self.fp3.setText("Eslabon 3: " + str(self.finalPoints[2]))
         self.Actualize()
 
@@ -350,6 +351,10 @@ class MainWindow(QWidget):
         self.finalPoints[2][2] -= 0.1
         self.fp3.setText("Eslabon 3: " + str(self.finalPoints[2]))
         self.Actualize()
+    
+    # Función para actualizar la variable asociada al menú desplegable
+    def update_variable(self):
+        self.selected_option = float(self.combo_box.currentText())
 
     def Actualize(self):
         Walker = RandWalk()
@@ -461,9 +466,6 @@ class MainWindow(QWidget):
     def btn8(self):
         print("Botón 6 fue presionado")
     
-    def update_variable(self):
-        self.selected_option = self.combobox.currentText()
-        print(f"La opción seleccionada es: {self.selected_option}")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
